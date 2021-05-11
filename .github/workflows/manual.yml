@@ -17,6 +17,18 @@ jobs:
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         run: |
-          echo "Log level: ${{ github.event.inputs.newRepositoryName }}"
-          echo "Tags: ${{ github.event.inputs.type }}" 
+          echo "New Repository Name: ${{ github.event.inputs.newRepositoryName }}"
+          echo "Type of new project: ${{ github.event.inputs.type }}" 
           echo "Secret: $TEST_SECRET" 
+      - name: Install Dependencies
+        run: |
+          curl -sL https://deb.nodesource.com/setup_14.x | bash -
+          apt install nodejs
+          npm install pulumi
+
+      - name: Run Pulumi
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          pulumi up
+        
