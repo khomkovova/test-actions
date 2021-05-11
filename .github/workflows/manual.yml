@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Using Variables
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
         run: |
           echo "Log level: ${{ github.event.inputs.newRepositoryName }}"
           echo "Tags: ${{ github.event.inputs.type }}" 
-          echo "Secret: ${{secrets.TEST_SECRET}}" 
+          echo "Secret: $TEST_SECRET" 
