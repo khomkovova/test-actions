@@ -22,8 +22,8 @@ jobs:
           echo "Secret: $TEST_SECRET" 
       - name: Install Dependencies
         run: |
-          curl -sL https://deb.nodesource.com/setup_14.x | bash -
-          apt install nodejs
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo apt install nodejs
           npm install pulumi
 
       - name: Run Pulumi
