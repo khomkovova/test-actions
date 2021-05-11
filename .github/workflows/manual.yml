@@ -3,17 +3,20 @@ name: Test manual steps
 on: 
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'     
+      newRepositoryName:
+        description: 'New Repository Name'    
         required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'  
+      type:
+        description: 'Type of new project'  
 
 jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
-        echo "Tags: ${{ github.event.inputs.tags }}" 
+      - name: Using Variables
+        env: # Or as an environment variable
+          super_secret: ${{ secrets.test_secret }}
+        run: |
+          echo "Log level: ${{ github.event.inputs.newRepositoryName }}"
+          echo "Tags: ${{ github.event.inputs.type }}" 
+          echo "Secret: ${{super_secret}}" 
