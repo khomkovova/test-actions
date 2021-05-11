@@ -15,8 +15,8 @@ jobs:
     steps:
       - name: Using Variables
         env: # Or as an environment variable
-          super_secret: ${{ secrets.test_secret }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
         run: |
           echo "Log level: ${{ github.event.inputs.newRepositoryName }}"
           echo "Tags: ${{ github.event.inputs.type }}" 
-          echo "Secret: ${{super_secret}}" 
+          echo "Secret: ${{TEST_SECRET}}" 
