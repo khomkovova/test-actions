@@ -40,12 +40,11 @@ jobs:
 
       - name: Slack Notification
         if: always()
-        uses: rtCamp/action-slack-notify@v2
+        uses: ravsamhq/notify-slack-action@master
+        with:
+          status: ${{ job.status }}
+          notify_when: 'failure'
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: Post Title
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
       # if: ${{ success() || failure() }}
         
