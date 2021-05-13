@@ -31,6 +31,10 @@ jobs:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
           pulumi up
+      - name: Slack Notification
+        if: always()
+        run: |
+          curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"This is posted to #general and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
 
       - name: show job status
         if: always()
