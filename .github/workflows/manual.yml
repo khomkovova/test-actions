@@ -20,11 +20,11 @@ jobs:
           echo "New Repository Name: ${{ github.event.inputs.newRepositoryName }}"
           echo "Type of new project: ${{ github.event.inputs.type }}" 
           echo "Secret: $TEST_SECRET" 
-      - name: Install Dependencies
-        run: |
-          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-          sudo apt install nodejs
-          npm install pulumi
+      # - name: Install Dependencies
+      #   run: |
+      #     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+      #     sudo apt install nodejs
+      #     npm install pulumi
 
       - name: Run Pulumi
         env:
@@ -38,5 +38,13 @@ jobs:
         env:
           status: ${{job.status}}
 
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: Post Title
       # if: ${{ success() || failure() }}
         
