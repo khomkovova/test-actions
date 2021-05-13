@@ -33,8 +33,13 @@ jobs:
           pulumi up
       - name: Slack Notification
         if: always()
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_CHANNEL: "#general"
+          SLACK_USERNAME: webhookbot
+
         run: |
-          curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"This is posted to #general and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
+          curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"This is posted to #general and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
 
       - name: show job status
         if: always()
@@ -46,5 +51,4 @@ jobs:
         if: always()
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-    
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
